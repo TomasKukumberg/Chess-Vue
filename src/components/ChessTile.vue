@@ -1,33 +1,57 @@
 <template>
-    <div class='piece'>
-        <img :src="imageSrc" alt="">
-        <p v-show='showTileNumber'>{{ props.row }}</p>
-        <p v-show='showTileLetter'>{{ props.column }}</p>
+    <div class='tile' :class="{'white-tile': tileColor === 'white', 'black-tile': tileColor === 'black'}">
+        <ChessPiece :row='props.row' :column='props.column' />
     </div>
 </template>
 
 <script lang='ts' setup>
 
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
-const props = defineProps(['row', 'column', 'imageSrc']);
+import { getRowNumber, getColumnNumber } from '../composables/utils';
+import ChessPiece from './ChessPiece.vue';
 
-const isMarked = ref(false);
+const props = defineProps(['row', 'column']);
+
+const rowNumber = computed(() => getRowNumber(props.row));
+const columnNumber = computed(() => getColumnNumber(props.column));
+const tileValue = computed(() => rowNumber.value + columnNumber.value);
+const tileColor = computed(() => tileValue.value % 2 === 0 ? 'black' : 'white');
+
+/*
+onMounted(() => {
+    pieceName.value = mapPieceName(rowNumber.value, columnNumber.value);
+});
+
+const pieceImage = computed(() => mapPieceImage(pieceName.value));
+
 
 const showTileNumber = computed(() => {
     return props.column === 'a';
 });
 
 const showTileLetter = computed(() => {
-    return props.row === '1';
+    return rowNumber.value === 1;
 });
+*/
 
 </script>
 
 <style scoped>
-.piece {
-    width: 3.125rem;
-    height: 3.125rem;
+.tile {
+    width: 12.5%;
+    height: 100%;
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.black-tile {
+    background-color: black;
+}
+
+.white-tile {
+    background-color: white;
 }
 </style>

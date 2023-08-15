@@ -21,6 +21,8 @@ const props = defineProps(['row']);
 
 <style scoped>
 .row {
+    width: 100%;
+    height: 12.5%;
     display: flex;
 }
 </style>

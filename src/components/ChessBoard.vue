@@ -18,5 +18,10 @@ import ChessRow from './ChessRow.vue';
 </script>
 
 <style scoped>
-
+.board {
+    width: 80vw;
+    height: 80vw;
+    max-width: 900px;
+    max-height: 900px;
+}
 </style>

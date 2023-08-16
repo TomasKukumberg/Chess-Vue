@@ -6,7 +6,7 @@
 
 <script lang='ts' setup>
 
-import { ref, computed, onMounted } from 'vue';
+import { computed } from 'vue';
 
 import { getRowNumber, getColumnNumber } from '../composables/utils';
 import ChessPiece from './ChessPiece.vue';
@@ -17,23 +17,6 @@ const rowNumber = computed(() => getRowNumber(props.row));
 const columnNumber = computed(() => getColumnNumber(props.column));
 const tileValue = computed(() => rowNumber.value + columnNumber.value);
 const tileColor = computed(() => tileValue.value % 2 === 0 ? 'black' : 'white');
-
-/*
-onMounted(() => {
-    pieceName.value = mapPieceName(rowNumber.value, columnNumber.value);
-});
-
-const pieceImage = computed(() => mapPieceImage(pieceName.value));
-
-
-const showTileNumber = computed(() => {
-    return props.column === 'a';
-});
-
-const showTileLetter = computed(() => {
-    return rowNumber.value === 1;
-});
-*/
 
 </script>
 

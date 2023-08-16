@@ -56,7 +56,4 @@ const blackPieceToHtml = {
 export const pieceToHtml = (piece: any, color: string): string => color === 'white' ? whitePieceToHtml[piece] : blackPieceToHtml[piece];
 
 export const getRowNumber = (row: string): number => parseInt(row);
-//export const getColumnNumber = (row: string): number => row.charCodeAt(0) - 96;
-export const getColumnNumber = (row: string): number => {
-    return row.charCodeAt(0) - 96;
-};
+export const getColumnNumber = (row: string): number => row.charCodeAt(0) - 96;

@@ -1,24 +1,24 @@
 export const mapPieceName = (row: number, column: number): string => {
     /* Maps initial position on the chessboard to a specific piece. */
-    if (row >=3 && row <= 6) {
+    if (row >=2 && row <= 5) {
         return 'empty';
     }
-    if (row === 7 || row === 2) {
+    if (row === 6 || row === 1) {
         return 'pawn';
     }
-    if (column === 1 || column === 8) {
+    if (column === 0 || column === 7) {
         return 'rook';
     }
-    if (column === 2 || column === 7) {
+    if (column === 1 || column === 6) {
         return 'knight';
     }
-    if (column === 3 || column === 6) {
+    if (column === 2 || column === 5) {
         return 'bishop';
     }
-    if (column === 4) {
+    if (column === 3) {
         return 'queen';
     }
-    if (column === 5) {
+    if (column === 4) {
         return 'king';
     }
     return 'error';
@@ -26,8 +26,8 @@ export const mapPieceName = (row: number, column: number): string => {
 
 export const mapPieceColors = (row: number, column: number): string => {
     /* Maps initial colors of pieces. */
-    if (row === 1 || row === 2) return 'white';
-    if (row === 7 || row === 8) return 'black';
+    if (row === 0 || row === 1) return 'white';
+    if (row === 6 || row === 7) return 'black';
     return 'none'; 
 }
 
@@ -56,4 +56,4 @@ const blackPieceToHtml = {
 export const pieceToHtml = (piece: any, color: string): string => color === 'white' ? whitePieceToHtml[piece] : blackPieceToHtml[piece];
 
 export const getRowNumber = (row: string): number => parseInt(row);
-export const getColumnNumber = (row: string): number => row.charCodeAt(0) - 96;
+export const getColumnNumber = (row: string): number => row.charCodeAt(0) - 97;

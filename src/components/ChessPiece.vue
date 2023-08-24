@@ -1,34 +1,38 @@
 <template>
-    <p class='piece' v-html='image'></p>
+    <p class='piece' :class="[pieceColor === 'white' ? 'white-piece' : pieceColor === 'black' ? 'black-piece' : '' ]" v-html='piece'></p>
 </template>
 
 <script lang='ts' setup>
 
-import {ref, computed, onMounted} from 'vue';
+import {ref, computed} from 'vue';
 
 import { getRowNumber, getColumnNumber } from '../composables/utils';
-import { mapPieceName, pieceToHtml, mapPieceColors } from '../composables/utils';
+import {useChessStore} from '../stores/chess'
 
-onMounted(() => {
-    player.value = mapPieceColors(rowNumber.value, columnNumber.value);
-    name.value = mapPieceName(rowNumber.value, columnNumber.value);
-    image.value = pieceToHtml(name.value, player.value);
-});
 
-const props = defineProps(['row', 'column'])
+const props = defineProps(['row', 'column']);
+const chessStore = useChessStore();
 
-const name = ref('');
-const image = ref('');
-const player = ref('none');
 const rowNumber = computed(() => getRowNumber(props.row));
 const columnNumber = computed(() => getColumnNumber(props.column));
+const position = computed(() => ({x: columnNumber.value, y: rowNumber.value}));
+const piece = computed(() => chessStore.getPiece(position.value));
+const pieceColor = computed(() => chessStore.getPieceColor(position.value));
 
 </script>
 
 <style scoped>
 
 .piece {
-    font-size: 100%
+    font-size: 120%
+}
+
+.white-piece {
+    color: white;
+}
+
+.black-piece {
+    color: black;
 }
 
 </style>

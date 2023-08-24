@@ -1,13 +1,6 @@
 <template>
     <div class='row'>
-        <ChessTile :row='props.row' column='a' />
-        <ChessTile :row='props.row' column='b'/>
-        <ChessTile :row='props.row' column='c'/>
-        <ChessTile :row='props.row' column='d'/>
-        <ChessTile :row='props.row' column='e'/>
-        <ChessTile :row='props.row' column='f'/>
-        <ChessTile :row='props.row' column='g'/>
-        <ChessTile :row='props.row' column='h'/>
+        <ChessTile :row='props.row' v-for="column in columns" :column='column' />
     </div>
 </template>
 
@@ -16,6 +9,7 @@
 import ChessTile from './ChessTile.vue';
 
 const props = defineProps(['row']);
+const columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
 </script>
 

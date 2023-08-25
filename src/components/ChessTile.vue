@@ -6,7 +6,7 @@
 
 <script lang='ts' setup>
 
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 
 import { getRowNumber, getColumnNumber } from '../composables/utils';
 import ChessPiece from './ChessPiece.vue';
@@ -20,13 +20,14 @@ const columnNumber = computed(() => getColumnNumber(props.column));
 const position = computed(() => ({x: columnNumber.value, y: rowNumber.value}));
 const tileValue = computed(() => rowNumber.value + columnNumber.value);
 const tileColor = computed(() => tileValue.value % 2 === 0 ? 'black' : 'white');
-const piece = computed(() => chessStore.getPiece(position.value));
 const clicked = computed(() => chessStore.isChosen(position.value));
 const highlighted = computed(() => chessStore.isHighlighted(position.value));
 
 const handleClick = () => {
-    chessStore.choose(position.value);
-    chessStore.highlightMoves(position.value);
+    if (chessStore.canMove(position.value)) {
+        chessStore.choose(position.value);
+        chessStore.highlightMoves(position.value);
+    }
 }
 
 </script>

@@ -23,6 +23,8 @@ export const useChessStore = defineStore('chess', () => {
         if (y < 2 ) return 'white';
         return 'none';
     }
+
+    const currentPlayer = ref('white');
     
     const board = ref(Array.from({ length: 8 }, (rowValue, rowIndex) =>
         Array.from({ length: 8 }, (columnValue, columnIndex) => ({
@@ -41,6 +43,10 @@ export const useChessStore = defineStore('chess', () => {
     }
 
     const choose = ({ x, y }: { x: number, y: number }): void => {
+        //console.log(board.value[y][x].pieceColor !== currentPlayer.value)
+        //if (board.value[y][x].pieceColor === 'none') return;
+        //if (board.value[y][x].pieceColor !== currentPlayer.value) return;
+        
         for (const [rowIndex, rowItem] of board.value.entries()) {
             for (const [columnIndex, columnItem] of rowItem.entries()) {
                 if (x === columnIndex && y === rowIndex && board.value[rowIndex][columnIndex].chosen) {
@@ -54,6 +60,10 @@ export const useChessStore = defineStore('chess', () => {
                 }
             }
         }
+    }
+
+    const canMove = ({ x, y }: { x: number, y: number }): boolean => {
+        return (board.value[y][x].pieceColor !== 'none') && (board.value[y][x].pieceColor === currentPlayer.value);
     }
 
     const selectedPiece = ({ x, y }: { x: number, y: number }) => board.value[y][x].piece !== '';
@@ -81,5 +91,9 @@ export const useChessStore = defineStore('chess', () => {
         console.log('unhighlighting...')
     }
 
-    return { board, move, choose, isChosen, getPiece, getPieceColor, highlightMoves, isHighlighted, selectedPiece }
+    return { board, move, choose, 
+             isChosen, getPiece, getPieceColor, 
+             highlightMoves, isHighlighted, selectedPiece,
+             currentPlayer, canMove
+    }
 })

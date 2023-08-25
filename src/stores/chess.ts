@@ -43,7 +43,11 @@ export const useChessStore = defineStore('chess', () => {
         board.value[newY][newX].piece = piece;
     }
 
+<<<<<<< HEAD
     const choose = ({ x, y }: Position): void => {
+=======
+    const choose = ({ x, y }: { x: number, y: number }): void => {
+>>>>>>> 73750b56add3cf6c96d3e69f279ee884a57f2828
         
         for (const [rowIndex, rowItem] of board.value.entries()) {
             for (const [columnIndex, columnItem] of rowItem.entries()) {

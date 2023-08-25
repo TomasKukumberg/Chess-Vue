@@ -25,8 +25,4 @@ watch(seconds, (value) => {
 
 </script>
 
-<style scoped>
-.timer {
-    text-align: right;
-}
-</style>
+<style scoped></style>

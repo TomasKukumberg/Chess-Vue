@@ -1,14 +1,12 @@
 <script setup lang="ts">
 
 import ChessBoard from './components/ChessBoard.vue';
-import Timer from './components/Timer.vue';
+import ChessBoardHeader from './components/ChessBoardHeader.vue';
 </script>
 
 <template>
-  <Timer />
+  <ChessBoardHeader />
   <ChessBoard />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

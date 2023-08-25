@@ -20,13 +20,13 @@ export const useChessStore = defineStore('chess', () => {
     }
 
     const getInitColor = (x: number, y: number): string => {
-        if (y > 5 ) return 'black';
-        if (y < 2 ) return 'white';
+        if (y > 5) return 'black';
+        if (y < 2) return 'white';
         return 'none';
     }
 
     const currentPlayer = ref('white');
-    
+
     const board = ref(Array.from({ length: 8 }, (rowValue, rowIndex) =>
         Array.from({ length: 8 }, (columnValue, columnIndex) => ({
             x: columnIndex,
@@ -44,12 +44,12 @@ export const useChessStore = defineStore('chess', () => {
     }
 
     const choose = ({ x, y }: Position): void => {
-        
+
         for (const [rowIndex, rowItem] of board.value.entries()) {
             for (const [columnIndex, columnItem] of rowItem.entries()) {
                 if (x === columnIndex && y === rowIndex && board.value[rowIndex][columnIndex].chosen) {
                     board.value[rowIndex][columnIndex].chosen = false;
-                    unhighlightMoves({x: columnIndex, y: rowIndex});
+                    unhighlightMoves({ x: columnIndex, y: rowIndex });
                 }
                 else if (x === columnIndex && y === rowIndex) {
                     board.value[rowIndex][columnIndex].chosen = true;
@@ -88,9 +88,10 @@ export const useChessStore = defineStore('chess', () => {
         board.value[y + 1][x].highlighted = false;
     }
 
-    return { board, move, choose, 
-             isChosen, getPiece, getPieceColor, 
-             highlightMoves, isHighlighted, selectedPiece,
-             currentPlayer, canMove
+    return {
+        board, move, choose,
+        isChosen, getPiece, getPieceColor,
+        highlightMoves, isHighlighted, selectedPiece,
+        currentPlayer, canMove
     }
 })

@@ -1,5 +1,6 @@
 <template>
-    <div class='tile' @click='handleClick' :class="[tileColor === 'white' ? 'white-tile' : 'black-tile', clicked ? 'clicked' : '', highlighted ? 'highlighted' : '']">
+    <div class='tile' @click='handleClick'
+        :class="[tileColor === 'white' ? 'white-tile' : 'black-tile', clicked ? 'clicked' : '', highlighted ? 'highlighted' : '']">
         <ChessPiece :row='props.row' :column='props.column' />
     </div>
 </template>
@@ -10,14 +11,14 @@ import { computed } from 'vue';
 
 import { getRowNumber, getColumnNumber } from '../composables/utils';
 import ChessPiece from './ChessPiece.vue';
-import {useChessStore} from '../stores/chess'
+import { useChessStore } from '../stores/chess'
 
 const props = defineProps(['row', 'column']);
 const chessStore = useChessStore();
 
 const rowNumber = computed(() => getRowNumber(props.row));
 const columnNumber = computed(() => getColumnNumber(props.column));
-const position = computed(() => ({x: columnNumber.value, y: rowNumber.value}));
+const position = computed(() => ({ x: columnNumber.value, y: rowNumber.value }));
 const tileValue = computed(() => rowNumber.value + columnNumber.value);
 const tileColor = computed(() => tileValue.value % 2 === 0 ? 'black' : 'white');
 const clicked = computed(() => chessStore.isChosen(position.value));
@@ -43,11 +44,11 @@ const handleClick = () => {
 }
 
 .black-tile {
-    background-color: rgb(208,139,70);
+    background-color: rgb(208, 139, 70);
 }
 
 .white-tile {
-    background-color: rgb(254,207,158);
+    background-color: rgb(254, 207, 158);
 }
 
 .clicked {
@@ -57,5 +58,4 @@ const handleClick = () => {
 .highlighted {
     border: 3px solid lightblue;
 }
-
 </style>

@@ -1,14 +1,13 @@
 <template>
     <div class='board'>
-        <ChessRow :row='7 - index' v-for='(row, index) in board' :key="index"/>
+        <ChessRow :row='7 - index' v-for='(row, index) in board' :key="index" />
     </div>
 </template>
 
 <script lang='ts' setup>
 
 import ChessRow from './ChessRow.vue';
-import {ref} from 'vue'
-import {useChessStore} from '../stores/chess'
+import { useChessStore } from '../stores/chess'
 
 const chess = useChessStore();
 const board = chess.board;

@@ -43,9 +43,6 @@ export const useChessStore = defineStore('chess', () => {
     }
 
     const choose = ({ x, y }: { x: number, y: number }): void => {
-        //console.log(board.value[y][x].pieceColor !== currentPlayer.value)
-        //if (board.value[y][x].pieceColor === 'none') return;
-        //if (board.value[y][x].pieceColor !== currentPlayer.value) return;
         
         for (const [rowIndex, rowItem] of board.value.entries()) {
             for (const [columnIndex, columnItem] of rowItem.entries()) {

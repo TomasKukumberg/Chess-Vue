@@ -1,6 +1,7 @@
 import { ref, type Ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { CHESS_PIECES } from '@/composables/chess_pieces'
+import { type Position } from '@/interfaces/chess'
 
 export const useChessStore = defineStore('chess', () => {
 
@@ -15,7 +16,7 @@ export const useChessStore = defineStore('chess', () => {
         if (x === 2 || x === 5) return isBlackPiece ? CHESS_PIECES.BLACK_BISHOP : CHESS_PIECES.WHITE_BISHOP;
         if (x === 3) return isBlackPiece ? CHESS_PIECES.BLACK_QUEEN : CHESS_PIECES.WHITE_QUEEN;
         if (x === 4) return isBlackPiece ? CHESS_PIECES.BLACK_KING : CHESS_PIECES.WHITE_KING;
-        return 'error';
+        return CHESS_PIECES.ERROR;
     }
 
     const getInitColor = (x: number, y: number): string => {
@@ -42,10 +43,7 @@ export const useChessStore = defineStore('chess', () => {
         board.value[newY][newX].piece = piece;
     }
 
-    const choose = ({ x, y }: { x: number, y: number }): void => {
-        //console.log(board.value[y][x].pieceColor !== currentPlayer.value)
-        //if (board.value[y][x].pieceColor === 'none') return;
-        //if (board.value[y][x].pieceColor !== currentPlayer.value) return;
+    const choose = ({ x, y }: Position): void => {
         
         for (const [rowIndex, rowItem] of board.value.entries()) {
             for (const [columnIndex, columnItem] of rowItem.entries()) {
@@ -62,33 +60,32 @@ export const useChessStore = defineStore('chess', () => {
         }
     }
 
-    const canMove = ({ x, y }: { x: number, y: number }): boolean => {
+    const canMove = ({ x, y }: Position): boolean => {
         return (board.value[y][x].pieceColor !== 'none') && (board.value[y][x].pieceColor === currentPlayer.value);
     }
 
-    const selectedPiece = ({ x, y }: { x: number, y: number }) => board.value[y][x].piece !== '';
+    const selectedPiece = ({ x, y }: Position) => board.value[y][x].piece !== '';
 
-    const isChosen = ({ x, y }: { x: number, y: number }): boolean => {
+    const isChosen = ({ x, y }: Position): boolean => {
         return board.value[y][x].chosen;
     }
 
-    const isHighlighted = ({ x, y }: { x: number, y: number }): boolean => {
+    const isHighlighted = ({ x, y }: Position): boolean => {
         return board.value[y][x].highlighted;
     }
 
-    const getPieceColor = ({ x, y }: { x: number, y: number }): string => {
+    const getPieceColor = ({ x, y }: Position): string => {
         return board.value[y][x].pieceColor;
     }
 
-    const getPiece = ({ x, y }: { x: number, y: number }): string => board.value[y][x].piece;
+    const getPiece = ({ x, y }: Position): string => board.value[y][x].piece;
 
-    const highlightMoves = ({ x, y }: { x: number, y: number }): void => {
+    const highlightMoves = ({ x, y }: Position): void => {
         board.value[y + 1][x].highlighted = true;
     }
 
-    const unhighlightMoves = ({ x, y }: { x: number, y: number }): void => {
+    const unhighlightMoves = ({ x, y }: Position): void => {
         board.value[y + 1][x].highlighted = false;
-        console.log('unhighlighting...')
     }
 
     return { board, move, choose, 

@@ -10,5 +10,6 @@ export const CHESS_PIECES = {
     BLACK_BISHOP : '&#9821',
     BLACK_ROOK : '&#9820',
     BLACK_QUEEN : '&#9819',
-    BLACK_KING : '&#9818'
+    BLACK_KING : '&#9818',
+    ERROR : 'error'
 }
